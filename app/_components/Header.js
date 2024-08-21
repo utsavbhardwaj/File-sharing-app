@@ -21,7 +21,7 @@ function Header() {
             </li>
 
             <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" href="/Upload"> Upload </a>
+              <a class="text-gray-500 transition hover:text-gray-500/75" href="/Upload"> upload </a>
             </li>
 
             <li>

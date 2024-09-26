@@ -21,7 +21,11 @@ function Header() {
             </li>
 
             <li>
+<<<<<<< HEAD
               <a class="text-white transition hover:text-blue-500/75" href="/upload"> Upload </a>
+=======
+              <a class="text-gray-500 transition hover:text-gray-500/75" href="/upload"> Upload </a>
+>>>>>>> origin/main
             </li>
 
             <li>

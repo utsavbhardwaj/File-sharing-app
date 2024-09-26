@@ -1,66 +1,123 @@
-"use client"
-import { File, Shield, Upload } from 'lucide-react'
-import Image from 'next/image'
+import React, { useState, useEffect } from 'react'
+import { Button } from './button'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import {
+  LayoutGrid,
+  FileText,
+  Upload,
+  Users,
+  Shield,
+  Sun,
+  Moon
+} from "lucide-react"
 
-function SideNav({closeSideBar}) {
-    const router = useRouter()
-    const menuList=[
-        {
-            id:1,
-            name:'Upload',
-            icon:Upload,
-            path:'/upload'
-        },
-        {
-            id:2,
-            name:'Files',
-            icon:File,
-            path:'/files'
-        },
-        {
-            id:3,
-            name:'Upgrade',
-            icon:Shield,
-            path:'/upgrade'
-        },
-    ]
+const ScrollArea = ({ className = '', children }) => (
+  <div className={`overflow-auto ${className}`}>{children}</div>
+)
 
-    const [activeIndex,setActiveIndex]=useState(0);
+const Switch = ({ checked, onCheckedChange, size = 'default', icon }) => (
+  <button
+    className={`relative inline-flex ${size === 'lg' ? 'h-6 w-11' : 'h-5 w-9'} items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${checked ? 'bg-primary' : 'bg-muted'}`}
+    role="switch"
+    aria-checked={checked}
+    onClick={() => onCheckedChange(!checked)}
+  >
+    <span className={`${checked ? 'translate-x-5' : 'translate-x-0'} inline-block h-4 w-4 transform rounded-full bg-background transition-transform`}>
+      {icon}
+    </span>
+  </button>
+)
 
-    const handleClick = (index, path) => {
-        setActiveIndex(index)
-        closeSideBar()
-        router.push(path)
+export default function Sidebar() {
+  const [theme, setTheme] = useState('light')
+
+  const menuList = [
+    {
+      id: 1,
+      name: 'Overview',
+      icon: LayoutGrid,
+      path: '/overview',
+      badge: 'New',
+    },
+    {
+      id: 2,
+      name: 'Upload',
+      icon: Upload,
+      path: '/upload',
+      
+    },
+    {
+      id: 3,
+      name: 'Files',
+      icon: FileText,
+      path: '/files'
+    },
+    {
+      id: 4,
+      name: 'Shared with me',
+      icon: Users,
+      path: '/shared'
+      
+    },
+    {
+      id: 5,
+      name: 'Upgrade',
+      icon: Shield,
+      path: '/upgrade'
     }
+  ]
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
+  }
 
   return (
-    <div className='shadow-sm border-r h-full'>
-    <div className='p-5 border-b'>
-    <Link href='/'> 
-        <Image src='/logo.svg' width={50}
-        height={50} alt='logo'/>
-    </Link>
+    <div className="w-64 h-screen bg-background text-foreground border-r flex flex-col fixed left-0 top-0">
+      <div className="p-6 flex justify-between items-center">
+        <h1 className="text-3xl font-bold">FileShare</h1>
+        <Switch
+          checked={theme === 'dark'}
+          onCheckedChange={toggleTheme}
+          size="lg"
+          icon={theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+        />
+      </div>
+      <ScrollArea className="flex-grow px-3">
+        <nav className="space-y-1">
+          {menuList.map((item) => (
+            <NavItem 
+              key={item.id}
+              icon={<item.icon className="h-6 w-6" />}
+              label={item.name}
+              path={item.path}
+              badge={item.badge}
+            />
+          ))}
+        </nav>
+      </ScrollArea>
     </div>
-    <div className='flex flex-col float-left w-full'>
-    {menuList.map((item,index)=>(
-        <button 
-        key={item.id}
-        className={`flex gap-2 p-4 px-6
-        hover:bg-gray-100 w-full
-        text-gray-500
-        ${activeIndex==index?'bg-blue-50 text-primary':null}`}
-        onClick={() => handleClick(index, item.path)}
-        >
-            <item.icon/>
-            <h2>{item.name}</h2>
-        </button>
-    ))}
-    </div>
-</div>
   )
 }
 
-export default SideNav
+function NavItem({ icon, label, path, badge }) {
+  return (
+    <Link href={path} className="block">
+      <Button 
+        variant="ghost" 
+        className="w-full justify-start h-16 text-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      >
+        {icon}
+        <span className="ml-4">{label}</span>
+        {badge && (
+          <span className="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-500 text-white">
+            {badge}
+          </span>
+        )}
+      </Button>
+    </Link>
+  )
+}

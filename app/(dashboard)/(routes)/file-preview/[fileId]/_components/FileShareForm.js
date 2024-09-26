@@ -1,60 +1,70 @@
-import { Copy, CopyIcon } from 'lucide-react'
-import React, {  useContext, useState } from 'react'
-import GlobalApi from './../../../../../_utils/GlobalApi'
+import { Copy, CopyIcon } from 'lucide-react';
+import React, { useContext, useState } from 'react';
+import GlobalApi from './../../../../../_utils/GlobalApi';
 import { useUser } from '@clerk/nextjs';
 import Toast from '../../../../../_components/Toast';
 
-function FileShareForm({ file,onPasswordSave }) {
-    const [isPasswordEnable,setIsEnablePassword]=useState(false);
-    const [password,setPassword]=useState('');
-    const [email,setEmail]=useState('');
-    const [toast,setToast]=useState();
-    const {user}=useUser();
-    const sendEmail=()=>{
-      
-        setToast({
-            status:'Info',
-            msg:'Sending Email...!'
-        })
-        const data={
-            emailToSend:email,
-            userName:user?.fullName,
-            fileName:file.fileName,
-            fileSize:file.fileSize,
-            fileType:file.fileType,
-            shortUrl:file?.shortUrl
-        }
-        GlobalApi.SendEmail(data).then(resp=>{
-            console.log(resp);
-            setToast({
-                status:'success',
-                msg:'Email Sent Successfully!'
-            })
-        })
-    }
+function FileShareForm({ file, onPasswordSave }) {
+  const [isPasswordEnable, setIsEnablePassword] = useState(false);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [toast, setToast] = useState();
+  const { user } = useUser();
 
-    const onCopyClick=()=>{
-        navigator.clipboard.writeText(file.shortUrl);
-        setToast({
-            status:'Copied',
-            msg:'Url Copied!'
-        })
+  // Check if the file object has an id property
+  const fileId = file?.id || 'undefined';
+  const shortUrl = `https://file-sharing-app-two-ruby.vercel.app/f/${fileId}`;
 
-    }
-    return file && (
-        <div className='flex flex-col gap-2'>
-            <div>
-            <label className='text-[14px] text-gray-500'>Short Url</label>
-            <div className='flex gap-5 p-2 border rounded-md justify-between'>
-                <input type="text" value={file.shortUrl} disabled
-                    className='disabled:text-gray-500 bg-transparent
-                    outline-none w-full' />
-                <Copy className='text-gray-400 hover:text-gray-600 
-                cursor-pointer' onClick={()=>onCopyClick()} />
-            </div>
-          
-            </div>
-            <div className='gap-3 flex mt-5'>
+  const sendEmail = () => {
+    setToast({
+      status: 'Info',
+      msg: 'Sending Email...!'
+    });
+
+    const data = {
+      emailToSend: email,
+      userName: user?.fullName,
+      fileName: file.fileName,
+      fileSize: file.fileSize,
+      fileType: file.fileType,
+      shortUrl: shortUrl
+    };
+
+    GlobalApi.SendEmail(data).then((resp) => {
+      console.log(resp);
+      setToast({
+        status: 'success',
+        msg: 'Email Sent Successfully!'
+      });
+    });
+  };
+
+  const onCopyClick = () => {
+    navigator.clipboard.writeText(shortUrl);
+    setToast({
+      status: 'Copied',
+      msg: 'Url Copied!'
+    });
+  };
+
+  return file && (
+    <div className='flex flex-col gap-2'>
+      <div>
+        <label className='text-[14px] text-gray-500'>Short Url</label>
+        <div className='flex gap-5 p-2 border rounded-md justify-between'>
+          <input
+            type="text"
+            value={shortUrl}
+            disabled
+            className='disabled:text-gray-500 bg-transparent outline-none w-full'
+          />
+          <Copy
+            className='text-gray-400 hover:text-gray-600 cursor-pointer'
+            onClick={() => onCopyClick()}
+          />
+        </div>
+      </div>
+      <div className='gap-3 flex mt-5'>
                 <input type='checkbox'
                 defaultChecked={file.password!=''}
                 onChange={(e)=>setIsEnablePassword(e.target.checked)}/>
@@ -98,8 +108,8 @@ function FileShareForm({ file,onPasswordSave }) {
            toast={toast}
            closeToast={()=>setToast(null)}
             />:null}
-        </div>
-    )
+    </div>
+  );
 }
 
-export default FileShareForm
+export default FileShareForm;

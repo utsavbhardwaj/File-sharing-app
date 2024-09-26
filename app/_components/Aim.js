@@ -1,40 +1,72 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
-function Aim() {
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <div>
-      <section className="overflow-hidden bg-customBlue sm:grid sm:grid-cols-2 sm:items-center">
-  <div className="p-8 md:p-12 lg:px-16 lg:py-24">
-    <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-      <h2 className="text-2xl font-bold text-gray-200 md:text-3xl">
-        Why File share App ?
-      </h2>
-
-      <p className="text-white md:mt-8 md:block text-lg">
-
-      Struggling with sharing large files? 
-      File Share Application lets you send high-quality media securely through password-protected links and direct email.
-       Overcome the limitations of platforms like WhatsApp and Telegram with our fast upload and download speeds. 
-       Perfect for content creators and media agencies, it ensures seamless collaboration by easily sharing raw footage and final videos. Enjoy efficient, secure file sharing tailored to your professional needs.
-      </p>
-
-      
-    </div>
-  </div>
-
-  <img 
-  alt="" 
-  src="/aimicon.png" 
-  className="w-full max-w-md mx-auto object-cover rounded-lg 
-             sm:h-[calc(90%_-_2rem)] sm:self-end sm:rounded-ss-[30px] 
-             md:h-[calc(90%_-_4rem)] md:rounded-ss-[60px] 
-             lg:h-[calc(90%_-_4rem)] xl:h-[400px] pb-6"
-
-/>
-
-
-</section>
+    <div className="mb-4">
+      <button
+        className="flex justify-between items-center w-full text-left p-4 rounded-lg bg-blue-400 bg-opacity-10 hover:bg-opacity-20 transition-colors duration-300"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-lg font-semibold text-white">{question}</span>
+        {isOpen ? (
+          <ChevronUp className="w-6 h-6 text-white" />
+        ) : (
+          <ChevronDown className="w-6 h-6 text-white" />
+        )}
+      </button>
+      {isOpen && (
+        <div className="mt-2 p-4 bg-blue-300 bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-lg">
+          <p className="text-blue-100">{answer}</p>
+        </div>
+      )}
     </div>
   )
 }
-export default Aim;
+
+export default function FAQSection() {
+  const faqs = [
+    {
+      question: "How secure is my data on your platform?",
+      answer: "We use bank-level encryption to protect your data. All files are encrypted both in transit and at rest, ensuring maximum security for your sensitive information."
+    },
+    {
+      question: "Can I share files with people who don't have an account?",
+      answer: "Yes! You can generate shareable links for your files that can be accessed by anyone, even if they don't have an account on our platform."
+    },
+    {
+      question: "What's the maximum file size I can upload?",
+      answer: "Our Free plan allows uploads of up to 2MB per file. For larger file sizes, check out our premium plans which offer uploads of up to 10GB per file."
+    },
+    {
+      question: "How long are my shared files available?",
+      answer: "By default, shared files remain available for 30 days. However, you can set custom expiration dates or make files available indefinitely if needed."
+    },
+    {
+      question: "Can I password protect my shared files?",
+      answer: "When sharing a file, you have the option to set a password. The recipient will need this password to access the file, adding an extra layer of security."
+    }
+  ]
+
+  return (
+    <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#142142' }}>
+      <div className="max-w-3xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-12 text-white">Frequently Asked Questions</h2>
+        <div className="space-y-6">
+          {faqs.map((faq, index) => (
+            <FAQItem key={index} question={faq.question} answer={faq.answer} />
+          ))}
+        </div>
+        <div className="mt-12 text-center">
+          <p className="text-xl text-blue-200 mb-4">Still have questions?</p>
+          <button className="bg-blue-500 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-600 transition duration-300 transform hover:scale-105 shadow-lg">
+            Contact Support
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}

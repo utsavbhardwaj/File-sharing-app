@@ -6,6 +6,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
+  --background: #ffffff;
+  --foreground: #000000;
+  --primary: #691fff;
+  --primary-foreground: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,12 +20,24 @@
   }
 }
 
+.dark {
+  --background: #1f2937;
+  --foreground: #ffffff;
+  --primary: #60a5fa;
+  --primary-foreground: #ffffff;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    );
+}
+
+.dark body {
+  color: var(--foreground);
+  background-color: var(--background);
 }

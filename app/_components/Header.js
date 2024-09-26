@@ -3,7 +3,7 @@ import React from 'react'
 function Header() {
   return (
     <div>
-       <header class="bg-white">
+       <header  style={{ backgroundColor: '#182c54' }}>
   <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 border-b" >
     <div class="flex h-16 items-center justify-between">
       <div class="flex-1 md:flex md:items-center md:gap-12">
@@ -17,23 +17,23 @@ function Header() {
         <nav aria-label="Global" class="hidden md:block">
           <ul class="flex items-center gap-6 text-sm">
             <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Home </a>
+              <a class="text-white transition hover:text-blue-500/75" href="#"> Home </a>
             </li>
 
             <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" href="/Upload"> Upload </a>
+              <a class="text-white transition hover:text-blue-500/75" href="/upload"> Upload </a>
             </li>
 
             <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> About Us  </a>
+              <a class="text-white transition hover:text-blue-500/75" href="#"> About Us  </a>
             </li>
 
             <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Contact Us </a>
+              <a class="text-white transition hover:text-blue-500/75" href="#"> Contact Us </a>
             </li>
 
             <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Blog </a>
+              <a class="text-white transition hover:text-blue-500/75" href="#"> Blog </a>
             </li>
           </ul>
         </nav>

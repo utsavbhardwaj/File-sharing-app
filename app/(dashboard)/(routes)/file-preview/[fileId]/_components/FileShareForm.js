@@ -112,8 +112,4 @@ function FileShareForm({ file, onPasswordSave }) {
   );
 }
 
-<<<<<<< HEAD
 export default FileShareForm;
-=======
-export default FileShareForm;
->>>>>>> origin/main

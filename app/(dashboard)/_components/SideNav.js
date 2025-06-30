@@ -33,11 +33,7 @@ export default function Sidenav() {
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <Folder className="w-5 h-5 text-white" />
           </div>
-          <Link href="/">
-  <span className="text-xl font-semibold text-gray-900 cursor-pointer">
-    FileShare
-  </span>
-</Link>
+          <span className="text-xl font-semibold text-gray-900">FileShare</span>
         </div>
       </div>
 
@@ -76,4 +72,3 @@ export default function Sidenav() {
     </div>
   )
 }
-// This component is a sidebar navigation for a dashboard application.

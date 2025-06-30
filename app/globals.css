@@ -20,12 +20,7 @@
   }
 }
 
-.dark {
-  --background: #1f2937;
-  --foreground: #ffffff;
-  --primary: #60a5fa;
-  --primary-foreground: #ffffff;
-}
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -37,7 +32,3 @@ body {
     );
 }
 
-.dark body {
-  color: var(--foreground);
-  background-color: var(--background);
-}

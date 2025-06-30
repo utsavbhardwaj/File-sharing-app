@@ -1,5 +1,6 @@
 import React from 'react';
 import { Shield, Zap, Globe, ArrowRight } from 'lucide-react';
+import Link from 'next/link'
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
   <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm border border-gray-700 hover:border-blue-500">
@@ -50,9 +51,11 @@ const Hero = () => {
             effortlessly, with the ability to scale and integrate across multiple platforms.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center shadow-lg hover:shadow-xl">
-              Start Sharing <ArrowRight className="ml-2 w-5 h-5" />
-            </button>
+            <Link href="/upload">
+  <div className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center shadow-lg hover:shadow-xl cursor-pointer">
+    Start Sharing <ArrowRight className="ml-2 w-5 h-5" />
+  </div>
+</Link>
             <button className="bg-gray-700 bg-opacity-50 hover:bg-opacity-75 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm">
               Explore Features
             </button>

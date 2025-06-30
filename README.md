@@ -2,6 +2,8 @@
 
 A simple and modern file sharing web application built using **Next.js**, **Firebase**, and **Tailwind CSS**, allowing users to securely upload and share files via download links.
 
+Live at - https://file-sharing-app-utsavbhardwajs-projects.vercel.app/
+
 ---
 
 ## 🏗️ Architecture Overview
@@ -25,25 +27,6 @@ The app uses a **monolithic frontend** powered by Next.js and integrates with **
 
 ---
 
-## 🚀 Key Features
-
-### 📤 File Upload & Sharing
-- Upload large files (up to 20MB)
-- Shareable download links
-- File preview and metadata
-- Clean UI with real-time upload progress
-
-### 🔐 Security & Access
-- Restrict file access via unique links
-- Environment variables to protect Firebase config
-- File validation and error handling
-
-### 🎨 UI/UX
-- Mobile-responsive and modern UI
-- Dark mode support (toggle)
-- Built using Tailwind CSS and Lucide icons
-
----
 ## 📊 System Architecture
                ┌──────────────────────────────┐
                │         Web Client           │
@@ -68,6 +51,26 @@ The app uses a **monolithic frontend** powered by Next.js and integrates with **
                │   (Client-side logic + DB)   │
                └──────────────────────────────┘
  ---
+
+ ## 🚀 Key Features
+
+### 📤 File Upload & Sharing
+- Upload large files (up to 20MB)
+- Shareable download links
+- File preview and metadata
+- Clean UI with real-time upload progress
+
+### 🔐 Security & Access
+- Restrict file access via unique links
+- Environment variables to protect Firebase config
+- File validation and error handling
+
+### 🎨 UI/UX
+- Mobile-responsive and modern UI
+- Dark mode support (toggle)
+- Built using Tailwind CSS and Lucide icons
+
+---
 
 ## 🛠️ Technology Stack
 
@@ -116,3 +119,7 @@ The app uses a **monolithic frontend** powered by Next.js and integrates with **
 3. Wait for progress bar to complete
 4. Copy the download link and open in new tab
 5. Ensure download starts properly
+
+---
+### Contact 📞 
+Email - utsavjha.me@gmail.com
